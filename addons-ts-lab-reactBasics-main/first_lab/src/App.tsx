@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
+import FormChangeName from './components/form/FormChangeName';
+import { UserData } from './types/types';
 
 function App() {
 
-  interface userData {
-    name: string;
-    age: number;
-    address: string;
-  }
-
-  const [user, setUser] = useState<userData>({} as userData);
+  const [user, setUser] = useState<UserData>({} as UserData);
 
   useEffect(() => {
     fetch('https://randomuser.me/api/')
@@ -21,13 +17,18 @@ function App() {
       }));
   }, []);
 
+  const handleclick = (event: React.FormEvent): void => {
+    event.preventDefault();
+    setUser({ ...user, name: event.target[0].value });
+  };
 
   return (
     <div className="App">
       <div className='container'>
         <h1>Name: {user?.name}</h1>
-        <h2>Age: {user?.age}</h2>
-        <h1>Address: {user?.address}</h1>
+        <h5>Age: {user?.age}</h5>
+        <h5>Address: {user?.address}</h5>
+        <FormChangeName user={user} handleclick={handleclick} />
       </div>
     </div>
   );

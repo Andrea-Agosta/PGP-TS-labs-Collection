@@ -4,12 +4,15 @@ import bodyParser from 'body-parser';
 
 const app: Application = express();
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 interface PuppiesData {
   id: number,
   breed: string,
   name: string,
   birth: string
 }
+
+let count: number = 5;
 
 const db: PuppiesData[] = [
   {
@@ -44,18 +47,45 @@ const getAllPuppies = (_req: Request, res: Response) => {
 
 const getPuppiesfromId = (_req: Request, res: Response) => {
   const id: number = Number(_req.params.id);
-  (id && id <= db.length) ? res.status(200).json(db[id - 1]) : res.status(400).json({ error: 'Bad Request' });
+  const findPuppy = db.find(puppy => puppy.id === id);
+  (id && findPuppy) ? res.status(200).json(db.find(puppy => puppy.id === id)) : res.status(400).json({ error: 'Bad Request' });
 };
 
 const addPuppies = (_req: Request, res: Response) => {
   const { breed, name, birth } = _req.body;
   if (breed && name && birth) {
-    const newId: number = db.length + 1;
+    const newId: number = count + 1;
+    count++;
     const newPuppy: PuppiesData = { id: newId, breed, name, birth };
     db.push(newPuppy);
     res.status(200).location(`/api/puppies/${newId}`).json(newPuppy);
   } else {
     res.status(400).json({ error: 'Bad request.' });
+  }
+};
+
+const updatePuppyFromId = (_req: Request, res: Response) => {
+  const id: number = Number(_req.params.id);
+  const { breed, name, birth } = _req.body;
+  const findPuppy = db.find(puppy => puppy.id === id);
+  if (id && findPuppy && breed && name && birth) {
+    const index = db.findIndex(puppy => puppy.id === id);
+    db.splice(index, 1, { id, breed, name, birth });
+    res.status(200).json(db.find(puppy => puppy.id === id))
+  } else {
+    res.status(400).json({ error: 'Bad Request' });
+  }
+};
+
+const deletePuppy = (_req: Request, res: Response) => {
+  const id: number = Number(_req.params.id);
+  const findPuppy = db.find(puppy => puppy.id === id);
+  if (id && findPuppy) {
+    const index = db.findIndex(puppy => puppy.id === id);
+    db.splice(index, 1);
+    res.status(200).json({ message: 'Puppy deleted successfully' });
+  } else {
+    res.status(400).json({ error: 'Bad request' });
   }
 };
 
@@ -66,5 +96,7 @@ app.get('/api/test', (_req: Request, res: Response) => {
 app.get('/api/puppies', getAllPuppies);
 app.get('/api/puppies/:id', getPuppiesfromId);
 app.post('/api/puppies', addPuppies);
+app.put('/api/puppies/:id', updatePuppyFromId);
+app.delete('/api/puppies/:id', deletePuppy);
 
 export default app;

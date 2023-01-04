@@ -6,7 +6,7 @@
   "scripts": {
     "compile": "tsc *.ts --outDir js",
     "compile:watch": "npm run compile -- --watch *.ts",
-    "test": "jest --watch --silent",
+    "test": "jest --watch --silent --coverage",
     "serve": "nodemon server.ts"
   },
   "repository": {

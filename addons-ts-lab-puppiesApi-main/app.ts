@@ -1,8 +1,9 @@
 import express from 'express';
 import { Request, Response, Application } from 'express';
+import bodyParser from 'body-parser';
 
 const app: Application = express();
-app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 interface PuppiesData {
   id: number,
   breed: string,
@@ -46,11 +47,24 @@ const getPuppiesfromId = (_req: Request, res: Response) => {
   (id && id <= db.length) ? res.status(200).json(db[id - 1]) : res.status(400).json({ error: 'Bad Request' });
 };
 
+const addPuppies = (_req: Request, res: Response) => {
+  const { breed, name, birth } = _req.body;
+  if (breed && name && birth) {
+    const newId: number = db.length + 1;
+    const newPuppy: PuppiesData = { id: newId, breed, name, birth };
+    db.push(newPuppy);
+    res.status(200).location(`/api/puppies/${newId}`).json(newPuppy);
+  } else {
+    res.status(400).json({ error: 'Bad request.' });
+  }
+};
+
 app.get('/api/test', (_req: Request, res: Response) => {
   return res.status(200).json({ test: 'is working as it should' });
 });
 
 app.get('/api/puppies', getAllPuppies);
 app.get('/api/puppies/:id', getPuppiesfromId);
+app.post('/api/puppies', addPuppies);
 
 export default app;

@@ -48,17 +48,16 @@ const getAllPuppies = (_req: Request, res: Response) => {
 const getPuppiesfromId = (_req: Request, res: Response) => {
   const id: number = Number(_req.params.id);
   const findPuppy = db.find(puppy => puppy.id === id);
-  (id && findPuppy) ? res.status(200).json(db.find(puppy => puppy.id === id)) : res.status(400).json({ error: 'Bad Request' });
+  (id && findPuppy) ? res.status(200).json(findPuppy) : res.status(400).json({ error: 'Bad Request' });
 };
 
 const addPuppies = (_req: Request, res: Response) => {
   const { breed, name, birth } = _req.body;
   if (breed && name && birth) {
-    const newId: number = count + 1;
+    const newPuppy: PuppiesData = { id: count + 1, breed, name, birth };
     count++;
-    const newPuppy: PuppiesData = { id: newId, breed, name, birth };
     db.push(newPuppy);
-    res.status(200).location(`/api/puppies/${newId}`).json(newPuppy);
+    res.status(200).json(newPuppy);
   } else {
     res.status(400).json({ error: 'Bad request.' });
   }
@@ -68,7 +67,7 @@ const updatePuppyFromId = (_req: Request, res: Response) => {
   const id: number = Number(_req.params.id);
   const { breed, name, birth } = _req.body;
   const findPuppy = db.find(puppy => puppy.id === id);
-  if (id && findPuppy && breed && name && birth) {
+  if (findPuppy && breed && name && birth) {
     const index = db.findIndex(puppy => puppy.id === id);
     db.splice(index, 1, { id, breed, name, birth });
     res.status(200).json(db.find(puppy => puppy.id === id))
@@ -80,7 +79,7 @@ const updatePuppyFromId = (_req: Request, res: Response) => {
 const deletePuppy = (_req: Request, res: Response) => {
   const id: number = Number(_req.params.id);
   const findPuppy = db.find(puppy => puppy.id === id);
-  if (id && findPuppy) {
+  if (findPuppy) {
     const index = db.findIndex(puppy => puppy.id === id);
     db.splice(index, 1);
     res.status(200).json({ message: 'Puppy deleted successfully' });

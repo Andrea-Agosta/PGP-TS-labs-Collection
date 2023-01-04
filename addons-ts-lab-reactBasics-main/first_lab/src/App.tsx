@@ -17,9 +17,10 @@ function App() {
       }));
   }, []);
 
-  const handleclick = (event: React.FormEvent): void => {
+  const handleclick = (event: any): void => {
     event.preventDefault();
     setUser({ ...user, name: event.target[0].value });
+    event.target[0].value = '';
   };
 
   return (

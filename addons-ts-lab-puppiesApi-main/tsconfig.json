@@ -12,7 +12,9 @@
     "noUncheckedIndexedAccess": true,
     "baseUrl": "./",
     "paths": {
-      "@src/*": ["./src/*"]
+      "@src/*": [
+        "./src/*"
+      ]
     },
     "esModuleInterop": true,
     "inlineSources": true,

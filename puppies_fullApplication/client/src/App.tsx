@@ -1,17 +1,18 @@
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
-import Card from './components/Card/Card';
 import Footer from './components/Footer/Footer';
+import { Routes, Route } from "react-router-dom";
+import Home from './layout/Home';
 
 function App() {
   return (
-    <div className="App ">
+    <div className="App">
       <Navbar />
-      <section className='min-height container mt-5'>
-        <Card />
-      </section>
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+      </Routes >
       <Footer />
-    </div>
+    </div >
   );
 }
 

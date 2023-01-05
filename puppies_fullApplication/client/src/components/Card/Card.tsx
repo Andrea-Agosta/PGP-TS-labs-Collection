@@ -1,16 +1,27 @@
-import React from 'react'
 import './Card.css';
+import { Puppies } from '../../type';
+interface CardPuppy {
+  puppy: Puppies;
+  index: number;
+  // handleclick(event: FormEvent): void;
+}
 
-const Card = () => {
+const Card = ({ puppy, index }: CardPuppy) => {
+  const url: string = `https://placedog.net/500?id=${index + 1}`;
   return (
-    <div className="card card-width">
-      <div className="card-body">
-        <h5 className="card-title">Card title</h5>
-        <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
-        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" className="card-link">Card link</a>
-        <a href="#" className="card-link">Another link</a>
-      </div>
+    <div className="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
+      <div className="flip-box my-4" role="button">
+        <div className="flip-box-inner">
+          <div className="flip-box-front">
+            <img src={url} alt="Dog" className="img-dim" />
+          </div>
+          <div className="flip-box-back d-flex flex-column text-center justify-content-center">
+            <h3 className="card-title">{puppy.name}</h3>
+            <h5 className="card-subtitle mb-2 text-muted">{puppy.breed}</h5>
+            <p className="card-text">{puppy.birth}</p>
+          </div>
+        </div>
+      </div >
     </div>
   )
 }

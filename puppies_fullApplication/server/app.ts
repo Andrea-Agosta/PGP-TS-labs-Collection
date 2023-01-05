@@ -1,6 +1,7 @@
 import express from 'express';
 import { Request, Response, Application } from 'express';
 import bodyParser from 'body-parser';
+import { db } from './db';
 
 const app: Application = express();
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -13,33 +14,6 @@ interface PuppiesData {
 }
 
 let count: number = 5;
-
-const db: PuppiesData[] = [
-  {
-    "id": 1,
-    "breed": "American Bully",
-    "name": "cfetherstone0",
-    "birth": "11/12/2022"
-  },
-  {
-    "id": 2,
-    "breed": "Australian Bulldog",
-    "name": "fbeaston1",
-    "birth": "3/12/2022"
-  },
-  {
-    "id": 3,
-    "breed": "Biewer Terrier",
-    "name": "mfutcher2",
-    "birth": "8/12/2022"
-  },
-  {
-    "id": 4,
-    "breed": "Beagle",
-    "name": "noram3",
-    "birth": "22/12/2022"
-  },
-];
 
 const getAllPuppies = (_req: Request, res: Response) => {
   res.status(200).json(db);

@@ -1,11 +1,13 @@
 import './Footer.css';
+import { Github } from 'react-bootstrap-icons';
+import { Linkedin } from 'react-bootstrap-icons';
 
 const Footer = () => {
   return (
-    <footer className="footer">
-      <div className="footer__icons" >
-        <a href="https://github.com/Andrea-Agosta"><i className="fa-brands fa-github"></i></a>
-        <a href="https://uk.linkedin.com/in/andrea-agosta-276ab866"><i className="fa-brands fa-linkedin"></i></a>
+    <footer className="footer-color d-flex flex-column text-center">
+      <div className="fs-2 m-2 mt-0" >
+        <a href="https://github.com/Andrea-Agosta"><Github className='me-3 github' /></a>
+        <a href="https://uk.linkedin.com/in/andrea-agosta-276ab866"><Linkedin className='linkedin' /></a>
       </div>
       <h6> &#169; Designed By Andrea Agosta </h6>
     </footer>

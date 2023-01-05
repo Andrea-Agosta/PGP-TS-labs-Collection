@@ -1,0 +1,50 @@
+.footer {
+  margin-top: 10%;
+  display: flex;
+  background-color: #f8f9fa;
+  color: #969696;
+  flex-direction: column;
+  align-items: center;
+  padding: 3%;
+  position: relative;
+  bottom: 0;
+}
+
+.footer a {
+  color: #969696;
+}
+
+.footer__icons {
+  font-size: 2rem;
+  padding: 1%;
+}
+
+.fa-github {
+  margin-right: 20px;
+}
+
+.fa-github:hover,
+.fa-linkedin:hover {
+  color: rgb(0, 153, 255);
+}
+
+@media (min-width: 481px) {
+  .footer {
+    padding: 1%;
+  }
+
+  .footer h4 {
+    margin: 1%;
+  }
+}
+
+@media (min-width: 769px) {
+
+  .footer h4 {
+    margin: 0;
+  }
+
+  .footer__icons {
+    padding: 0 0 0.5%;
+  }
+}

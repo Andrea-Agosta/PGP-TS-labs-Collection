@@ -1,5 +1,5 @@
 .min-height {
-  min-height: 76vh;
+  min-height: 90vh;
 }
 
 .btn-up {
@@ -7,4 +7,17 @@
   top: 90%;
   left: 96%;
   z-index: 10;
+}
+
+.utility-icon {
+  position: relative;
+  top: 77%;
+  left: 83%;
+  font-size: 1.7rem;
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.utility-icon:hover {
+  transform: scale(1.3);
 }

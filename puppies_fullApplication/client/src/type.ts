@@ -4,3 +4,7 @@ export interface Puppies {
   name: string,
   birth: string
 }
+
+export interface PuppiesList {
+  puppies: Puppies[];
+}

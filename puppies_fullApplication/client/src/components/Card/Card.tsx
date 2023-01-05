@@ -1,19 +1,18 @@
 import './Card.css';
 import { Puppies } from '../../type';
+import { Link } from "react-router-dom";
 interface CardPuppy {
   puppy: Puppies;
   index: number;
-  // handleclick(event: FormEvent): void;
 }
 
 const Card = ({ puppy, index }: CardPuppy) => {
-  const url: string = `https://placedog.net/500?id=${index + 1}`;
   return (
     <div className="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
-      <div className="flip-box my-4" role="button">
+      <Link to={`/puppy/${puppy.id}`} className="flip-box my-4" role="button" state={{ from: puppy }}>
         <div className="flip-box-inner">
           <div className="flip-box-front">
-            <img src={url} alt="Dog" className="img-dim" />
+            <img src={`https://placedog.net/500?id=${puppy.id}`} alt="Dog" className="img-dim" />
           </div>
           <div className="flip-box-back d-flex flex-column text-center justify-content-center">
             <h3 className="card-title">{puppy.name}</h3>
@@ -21,7 +20,7 @@ const Card = ({ puppy, index }: CardPuppy) => {
             <p className="card-text">{puppy.birth}</p>
           </div>
         </div>
-      </div >
+      </Link >
     </div>
   )
 }

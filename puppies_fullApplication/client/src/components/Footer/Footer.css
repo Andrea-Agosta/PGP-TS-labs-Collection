@@ -1,0 +1,17 @@
+.footer-color {
+  background-color: #f8f9fa;
+  color: #969696;
+}
+
+.footer-color a {
+  color: #969696;
+}
+
+.github:hover,
+.linkedin:hover {
+  color: #dc3545;
+}
+
+@media (min-width: 481px) {}
+
+@media (min-width: 769px) {}

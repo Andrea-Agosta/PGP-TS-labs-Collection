@@ -1,0 +1,10 @@
+.min-height {
+  min-height: 76vh;
+}
+
+.btn-up {
+  position: fixed;
+  top: 90%;
+  left: 96%;
+  z-index: 10;
+}

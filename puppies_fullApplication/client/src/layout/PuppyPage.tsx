@@ -1,5 +1,6 @@
 import { Puppies, PuppiesList } from "../type"
-import { Pencil, Trash3Fill } from "react-bootstrap-icons"
+import { Trash3Fill } from "react-bootstrap-icons"
+import Modal from "../components/Modal/Modal";
 
 const PuppyPage = ({ puppies }: PuppiesList) => {
   const id: number = Number(window.location.href.split('/').pop());
@@ -10,12 +11,12 @@ const PuppyPage = ({ puppies }: PuppiesList) => {
       <div className="bg-light mt-5 p-5 row">
         <img src={`https://placedog.net/600?id=${id}`} alt="Dog" />
         <div className="col-6">
-          <h3 className="mt-3">Name: {puppy[0].name}</h3>
+          <h3 className="mt-3">Name: <span className="text-danger">{puppy[0].name}</span></h3>
           <h5>Breed: {puppy[0].breed}</h5>
           <h5 className="mb-0">Birth: {puppy[0].birth}</h5>
         </div>
         <div className="col-6">
-          <Pencil className="utility-icon me-4" type="button" />
+          <Modal typeBody={"edit"} />
           <Trash3Fill className="utility-icon" type="button" />
         </div>
       </div>

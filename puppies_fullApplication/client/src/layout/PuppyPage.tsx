@@ -3,6 +3,10 @@ import { Trash3Fill } from "react-bootstrap-icons"
 import Modal from "../components/Modal/Modal";
 
 const PuppyPage = ({ puppies }: PuppiesList) => {
+
+  console.log(puppies);
+
+
   const id: number = Number(window.location.href.split('/').pop());
   const puppy: Puppies[] = puppies.filter(puppy => puppy.id === id);
 
@@ -16,7 +20,7 @@ const PuppyPage = ({ puppies }: PuppiesList) => {
           <h5 className="mb-0">Birth: {puppy[0].birth}</h5>
         </div>
         <div className="col-6">
-          <Modal typeBody={"edit"} />
+          <Modal typeBody={"edit"} id={id} />
           <Trash3Fill className="utility-icon" type="button" />
         </div>
       </div>

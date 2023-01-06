@@ -20,7 +20,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
+      <Navbar nPuppies={puppies.length} />
       <div className="min-height">
         <Routes>
           <Route path="/" element={<Home puppies={puppies} />}></Route>

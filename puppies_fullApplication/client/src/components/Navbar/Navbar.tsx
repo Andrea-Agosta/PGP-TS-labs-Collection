@@ -1,6 +1,10 @@
 import Modal from "../Modal/Modal";
 
-const Navbar = () => {
+interface id {
+  nPuppies: number;
+}
+
+const Navbar = ({ nPuppies }: id) => {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary ">
       <div className="container">
@@ -8,7 +12,7 @@ const Navbar = () => {
         <div>
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
           </ul>
-          <Modal typeBody={"addPuppy"} />
+          <Modal typeBody={"addPuppy"} id={nPuppies} />
         </div>
       </div>
     </nav>

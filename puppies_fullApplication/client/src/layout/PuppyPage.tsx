@@ -3,6 +3,7 @@ import { Trash3Fill } from "react-bootstrap-icons"
 import Modal from "../components/Modal/Modal";
 import { useEffect, useState } from "react";
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const PuppyPage = () => {
   const [puppyData, setPuppyData] = useState<Puppies>({} as Puppies);
@@ -13,12 +14,18 @@ const PuppyPage = () => {
   if (partialUrl) {
     id = Number(partialUrl[1]);
   }
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get(`/api/puppies/${id}`)
       .then(data => data.data)
       .then(data => setPuppyData(data))
   });
+
+  const deletePuppy = (): void => {
+    axios.delete(`/api/puppies/${id}`)
+    navigate(`/`);
+  }
 
   return (
     <div className='mt-5 d-flex justify-content-center mb-5' >
@@ -31,7 +38,7 @@ const PuppyPage = () => {
         </div>
         <div className="col-6">
           <Modal typeBody={"edit"} id={id} />
-          <Trash3Fill className="utility-icon" type="button" />
+          <Trash3Fill className="utility-icon" type="button" onClick={deletePuppy} />
         </div>
       </div>
     </div>

@@ -12,7 +12,6 @@ interface ModalBody {
 
 const Modal = ({ typeBody, id }: ModalBody) => {
   const navigate = useNavigate();
-
   const formData = (event: FormEvent<HTMLInputElement>): void => {
     const [name, breed, birth]: any = event.target;
     if (typeBody === "addPuppy") {
@@ -25,16 +24,27 @@ const Modal = ({ typeBody, id }: ModalBody) => {
           birth: birth.value
         }
       });
+      navigate(`/puppy/${id + 1}`, {
+        state: {
+          puppies: {
+            name: name.value,
+            breed: breed.value,
+            birth: birth.value
+          }
+        }
+      });
     }
-    navigate(`/puppy/${id + 1}`, {
-      state: {
-        puppies: {
+    if (typeBody === "edit") {
+      axios({
+        method: 'put',
+        url: `/api/puppies/${id}`,
+        data: {
           name: name.value,
           breed: breed.value,
           birth: birth.value
         }
-      }
-    });
+      });
+    }
   };
 
   return typeBody === "addPuppy" ?
@@ -59,13 +69,7 @@ const Modal = ({ typeBody, id }: ModalBody) => {
     :
     (
       <>
-        {typeBody === "addPuppy" ?
-          <button type="button" className="btn btn-danger me-4" data-bs-toggle="modal" data-bs-target="#staticBackdropEdit" >
-            Add new Puppy
-          </button>
-          :
-          < Pencil className="utility-icon me-4" data-bs-toggle="modal" data-bs-target="#staticBackdropEdit" />
-        }
+        < Pencil className="utility-icon me-4" data-bs-toggle="modal" data-bs-target="#staticBackdropEdit" />
         <div className="modal" id="staticBackdropEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={- 1} aria-labelledby="staticBackdropLabel" aria-hidden="true" >
           <div className="modal-dialog modal-dialog-centered" >
             <div className="modal-content" >

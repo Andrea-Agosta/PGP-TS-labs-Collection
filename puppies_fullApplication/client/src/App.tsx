@@ -13,6 +13,7 @@ function App() {
   const [puppies, setPuppies] = useState<Puppies[]>([{} as Puppies]);
 
   useEffect(() => {
+    console.log('fetch data');
     axios.get('/api/puppies')
       .then(data => data.data)
       .then(data => setPuppies(data))

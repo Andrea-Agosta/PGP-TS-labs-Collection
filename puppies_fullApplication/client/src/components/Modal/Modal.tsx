@@ -10,11 +10,10 @@ interface ModalBody {
   id: number
 }
 
-const Modal = ({ typeBody, id }: ModalBody): any => {
+const Modal = ({ typeBody, id }: ModalBody) => {
   const navigate = useNavigate();
 
   const formData = (event: FormEvent<HTMLInputElement>): void => {
-    event.preventDefault();
     const [name, breed, birth]: any = event.target;
     if (typeBody === "addPuppy") {
       axios({
@@ -27,7 +26,7 @@ const Modal = ({ typeBody, id }: ModalBody): any => {
         }
       });
     }
-    navigate(`/puppy/${id}`, {
+    navigate(`/puppy/${id + 1}`, {
       state: {
         puppies: {
           name: name.value,

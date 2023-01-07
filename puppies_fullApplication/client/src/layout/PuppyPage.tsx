@@ -1,23 +1,33 @@
-import { Puppies, PuppiesList } from "../type"
+import { Puppies } from "../type"
 import { Trash3Fill } from "react-bootstrap-icons"
 import Modal from "../components/Modal/Modal";
+import { useEffect, useState } from "react";
+import axios from 'axios';
 
-const PuppyPage = ({ puppies }: PuppiesList) => {
+const PuppyPage = () => {
+  const [puppyData, setPuppyData] = useState<Puppies>({} as Puppies);
+  let id: number = -1;
+  let regex = /\/([0-9]+)(?=[^/]*$)/;
+  const url: string = window.location.href;
+  const partialUrl = regex.exec(String(url));
+  if (partialUrl) {
+    id = Number(partialUrl[1]);
+  }
 
-  console.log(puppies);
-
-
-  const id: number = Number(window.location.href.split('/').pop());
-  const puppy: Puppies[] = puppies.filter(puppy => puppy.id === id);
+  useEffect(() => {
+    axios.get(`/api/puppies/${id}`)
+      .then(data => data.data)
+      .then(data => setPuppyData(data))
+  });
 
   return (
-    <div className='mt-5 d-flex justify-content-center mb-5'>
+    <div className='mt-5 d-flex justify-content-center mb-5' >
       <div className="bg-light mt-5 p-5 row">
         <img src={`https://placedog.net/600?id=${id}`} alt="Dog" />
         <div className="col-6">
-          <h3 className="mt-3">Name: <span className="text-danger">{puppy[0].name}</span></h3>
-          <h5>Breed: {puppy[0].breed}</h5>
-          <h5 className="mb-0">Birth: {puppy[0].birth}</h5>
+          <h3 className="mt-3">Name: <span className="text-danger">{puppyData.name}</span></h3>
+          <h5>Breed: {puppyData.breed}</h5>
+          <h5 className="mb-0">Birth: {puppyData.birth}</h5>
         </div>
         <div className="col-6">
           <Modal typeBody={"edit"} id={id} />

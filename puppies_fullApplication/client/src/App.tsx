@@ -24,7 +24,7 @@ function App() {
       <div className="min-height">
         <Routes>
           <Route path="/" element={<Home puppies={puppies} />}></Route>
-          <Route path="/puppy/:id" element={<PuppyPage puppies={puppies} />}></Route>
+          <Route path="/puppy/:id" element={<PuppyPage />}></Route>
         </Routes >
       </div>
       <Footer />

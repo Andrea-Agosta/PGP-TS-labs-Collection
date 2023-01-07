@@ -24,7 +24,7 @@ const PuppyPage = () => {
 
   const deletePuppy = (): void => {
     axios.delete(`/api/puppies/${id}`)
-    navigate(`/`);
+    navigate(`/`, { state: { reload: true } });
   }
 
   return (
@@ -37,7 +37,7 @@ const PuppyPage = () => {
           <h5 className="mb-0">Birth: {puppyData.birth}</h5>
         </div>
         <div className="col-6">
-          <Modal typeBody={"edit"} id={id} />
+          <Modal typeBody={"edit"} />
           <Trash3Fill className="utility-icon" type="button" onClick={deletePuppy} />
         </div>
       </div>

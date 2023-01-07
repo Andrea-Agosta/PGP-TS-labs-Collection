@@ -3,15 +3,23 @@ import { Pencil } from "react-bootstrap-icons";
 import Form from "../Form/Form";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from 'react';
 
 
 interface ModalBody {
   typeBody: string;
-  id: number
 }
 
-const Modal = ({ typeBody, id }: ModalBody) => {
+const Modal = ({ typeBody }: ModalBody) => {
   const navigate = useNavigate();
+  const [id, setId] = useState<number>(0);
+
+  useEffect(() => {
+    axios.get('/api/puppies')
+      .then(data => data.data)
+      .then(data => setId(data.pop().id))
+  }, []);
+
   const formData = (event: FormEvent<HTMLInputElement>): void => {
     const [name, breed, birth]: any = event.target;
     if (typeBody === "addPuppy") {

@@ -13,7 +13,7 @@ interface PuppiesData {
   birth: string
 }
 
-let count: number = 5;
+let count: number = 100;
 
 const getAllPuppies = (_req: Request, res: Response) => {
   res.status(200).json(db);
@@ -27,6 +27,7 @@ const getPuppiesfromId = (_req: Request, res: Response) => {
 
 const addPuppies = (_req: Request, res: Response) => {
   const { breed, name, birth } = _req.body;
+
   if (breed && name && birth) {
     const newPuppy: PuppiesData = { id: count + 1, breed, name, birth };
     count++;

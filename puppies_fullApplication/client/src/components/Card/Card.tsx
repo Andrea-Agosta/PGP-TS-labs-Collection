@@ -15,7 +15,7 @@ const Card = ({ puppy, index }: CardPuppy) => {
             <img src={`https://placedog.net/500?id=${puppy.id}`} alt="Dog" className="img-dim" />
           </div>
           <div className="flip-box-back d-flex flex-column text-center justify-content-center">
-            <h3 className="card-title">{puppy.name}</h3>
+            <h3 className="card-title text-danger">{puppy.name}</h3>
             <h5 className="card-subtitle mb-2 text-muted">{puppy.breed}</h5>
             <p className="card-text">{puppy.birth}</p>
           </div>

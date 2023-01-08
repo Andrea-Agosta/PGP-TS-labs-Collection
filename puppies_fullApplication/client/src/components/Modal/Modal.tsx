@@ -32,7 +32,9 @@ const Modal = ({ typeBody }: ModalBody) => {
           birth: birth.value
         }
       });
-      navigate(`/puppy/${id + 1}`, {
+      setId(id + 1);
+
+      navigate(`/puppy/${id}`, {
         state: {
           puppies: {
             name: name.value,

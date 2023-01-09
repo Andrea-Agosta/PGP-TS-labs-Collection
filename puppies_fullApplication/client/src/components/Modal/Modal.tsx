@@ -1,4 +1,4 @@
-import { FormEvent } from "react";
+import { ChangeEvent, FormEvent } from "react";
 import { Pencil } from "react-bootstrap-icons";
 import Form from "../Form/Form";
 import axios from 'axios';
@@ -10,9 +10,16 @@ interface ModalBody {
   typeBody: string;
 }
 
+interface FormaData {
+  name: string,
+  breed: string,
+  birth: string
+}
+
 const Modal = ({ typeBody }: ModalBody) => {
   const navigate = useNavigate();
   const [id, setId] = useState<number>(0);
+  const [formData, setFormData] = useState<FormaData>({ name: "", breed: "", birth: "" });
 
   useEffect(() => {
     axios.get('/api/puppies')
@@ -20,18 +27,29 @@ const Modal = ({ typeBody }: ModalBody) => {
       .then(data => setId(data.pop().id))
   }, []);
 
-  const formData = (event: FormEvent<HTMLInputElement>): void => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const newValue = event.currentTarget.value;
+    const name = event.currentTarget.name;
+    if (name === "name") {
+      setFormData(prev => ({ ...prev, name: newValue }));
+    }
+    if (name === "breed") {
+      setFormData(prev => ({ ...prev, breed: newValue }));
+    }
+    if (name === "birth") {
+      setFormData(prev => ({ ...prev, birth: newValue }));
+    }
+  }
+
+  const submitData = (event: FormEvent<HTMLInputElement>): void => {
     const [name, breed, birth]: any = event.target;
+
     if (typeBody === "addPuppy") {
 
       axios({
         method: 'post',
         url: `/api/puppies`,
-        data: {
-          name: name.value,
-          breed: breed.value,
-          birth: birth.value
-        }
+        data: formData
       });
       navigate(`/puppy/${id + 1}`,
         {
@@ -48,11 +66,7 @@ const Modal = ({ typeBody }: ModalBody) => {
       axios({
         method: 'put',
         url: `/api/puppies/${id}`,
-        data: {
-          name: name.value,
-          breed: breed.value,
-          birth: birth.value
-        }
+        data: formData
       });
     }
   };
@@ -70,7 +84,7 @@ const Modal = ({ typeBody }: ModalBody) => {
                 <h1 className="modal-title fs-5" id="staticBackdropLabel" >Add New Puppy</h1>
                 < button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
               </div>
-              <Form formData={formData} />
+              <Form submitData={submitData} handleChange={handleChange} />
             </div>
           </div>
         </div>
@@ -87,7 +101,7 @@ const Modal = ({ typeBody }: ModalBody) => {
                 <h1 className="modal-title fs-5" id="staticBackdropLabel" >Edit Puppy Data</h1>
                 < button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
               </div>
-              <Form formData={formData} />
+              <Form submitData={submitData} handleChange={handleChange} />
             </div>
           </div>
         </div>

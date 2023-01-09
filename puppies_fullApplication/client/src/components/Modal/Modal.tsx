@@ -4,17 +4,8 @@ import Form from "../Form/Form";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
+import { FormaData, ModalBody } from "../../type";
 
-
-interface ModalBody {
-  typeBody: string;
-}
-
-interface FormaData {
-  name: string,
-  breed: string,
-  birth: string
-}
 
 const Modal = ({ typeBody }: ModalBody) => {
   const navigate = useNavigate();
@@ -30,6 +21,7 @@ const Modal = ({ typeBody }: ModalBody) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newValue = event.currentTarget.value;
     const name = event.currentTarget.name;
+
     if (name === "name") {
       setFormData(prev => ({ ...prev, name: newValue }));
     }
@@ -37,15 +29,13 @@ const Modal = ({ typeBody }: ModalBody) => {
       setFormData(prev => ({ ...prev, breed: newValue }));
     }
     if (name === "birth") {
-      setFormData(prev => ({ ...prev, birth: newValue }));
+      const correctDataFormat = newValue.split('-').reverse().join('/');
+      setFormData(prev => ({ ...prev, birth: correctDataFormat }));
     }
   }
 
   const submitData = (event: FormEvent<HTMLInputElement>): void => {
-    const [name, breed, birth]: any = event.target;
-
     if (typeBody === "addPuppy") {
-
       axios({
         method: 'post',
         url: `/api/puppies`,
@@ -53,13 +43,7 @@ const Modal = ({ typeBody }: ModalBody) => {
       });
       navigate(`/puppy/${id + 1}`,
         {
-          state: {
-            puppies: {
-              name: name.value,
-              breed: breed.value,
-              birth: birth.value
-            }
-          }
+          state: formData
         });
     }
     if (typeBody === "edit") {

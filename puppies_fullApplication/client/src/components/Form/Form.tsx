@@ -6,6 +6,10 @@ interface sendFormData {
 }
 
 const Form = ({ submitData, handleChange }: sendFormData) => {
+  const today: Date = new Date();
+  const minDate: string = `${today.getFullYear() - 1}-${(today.getMonth() + 1) < 10 ? `0${today.getMonth() + 1}` : today.getMonth() + 1}-${today.getDate() < 10 ? `0${today.getDate()}` : today.getDate()}`;
+  const maxDate: string = `${today.getFullYear()}-${(today.getMonth() + 1) < 10 ? `0${today.getMonth() + 1}` : today.getMonth() + 1}-${today.getDate() < 10 ? `0${today.getDate()}` : today.getDate()}`;
+
   return (
     <form onSubmit={submitData}>
       <div className="container p-4 text-start">
@@ -19,7 +23,7 @@ const Form = ({ submitData, handleChange }: sendFormData) => {
         </div>
         <div className="mb-3">
           <label htmlFor="birth" className="form-label">Birth:</label>
-          <input type="text" className="form-control" id="birth" name="birth" required onChange={handleChange} />
+          <input type="date" className="form-control" id="birth" name="birth" onChange={handleChange} min={minDate} max={maxDate} required />
         </div>
       </div>
       <div className="modal-footer">

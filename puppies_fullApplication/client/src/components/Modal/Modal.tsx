@@ -23,6 +23,7 @@ const Modal = ({ typeBody }: ModalBody) => {
   const formData = (event: FormEvent<HTMLInputElement>): void => {
     const [name, breed, birth]: any = event.target;
     if (typeBody === "addPuppy") {
+
       axios({
         method: 'post',
         url: `/api/puppies`,
@@ -32,17 +33,16 @@ const Modal = ({ typeBody }: ModalBody) => {
           birth: birth.value
         }
       });
-      setId(id + 1);
-
-      navigate(`/puppy/${id}`, {
-        state: {
-          puppies: {
-            name: name.value,
-            breed: breed.value,
-            birth: birth.value
+      navigate(`/puppy/${id + 1}`,
+        {
+          state: {
+            puppies: {
+              name: name.value,
+              breed: breed.value,
+              birth: birth.value
+            }
           }
-        }
-      });
+        });
     }
     if (typeBody === "edit") {
       axios({

@@ -5,13 +5,12 @@ import axios from 'axios';
 
 const Home = () => {
   const [puppies, setPuppies] = useState<Puppies[]>([{} as Puppies]);
-  const [reload, setReload] = useState<boolean>(false);
 
   useEffect(() => {
     axios.get('/api/puppies')
       .then(data => data.data)
       .then(data => setPuppies(data))
-  }, [reload]);
+  }, []);
 
   return (
     <>

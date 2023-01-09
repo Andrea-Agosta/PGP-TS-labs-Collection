@@ -22,7 +22,7 @@ describe('Testing api endpoint', () => {
       "id": 1,
       "breed": "American Bully",
       "name": "cfetherstone0",
-      "birth": "11/12/2022"
+      "birth": "11/6/2022"
     });
   });
 

@@ -7,7 +7,7 @@ interface sendFormData {
 const Form = ({ formData }: sendFormData) => {
   return (
     <form onSubmit={formData}>
-      <div className="container p-4">
+      <div className="container p-4 text-start">
         <div className="mb-3">
           <label htmlFor="name" className="form-label">Name:</label>
           <input type="text" className="form-control" id="name" required />

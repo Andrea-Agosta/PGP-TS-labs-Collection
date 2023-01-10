@@ -63,4 +63,10 @@ const addNewItemToCart = async (productId: string): Promise<Product[]> => {
   return data;
 };
 
-export { getAllProduct, getProductById, getCart, addNewItemToCart };
+const deleteCartById = async (cartId: string): Promise<void> => {
+  const query: string = `DELETE FROM products WHERE id = ${cartId};`;
+  const data = await connectionDB(query);
+  return data;
+};
+
+export { getAllProduct, getProductById, getCart, addNewItemToCart, deleteCartById };

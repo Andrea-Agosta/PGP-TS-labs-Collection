@@ -8,7 +8,7 @@ router.get('/', (_req: Request, res: Response) => {
   res.status(200).json(data);
 });
 router.get('/:id', (_req: Request, res: Response) => {
-  const data = getProductbyId(_req.body.productId);
+  const data = getProductbyId(_req.params.productId);
   res.status(200).json(data);
 });
 

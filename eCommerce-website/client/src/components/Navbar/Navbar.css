@@ -1,0 +1,15 @@
+.logo {
+  color: orange;
+  font-size: 2rem;
+  line-height: 20px;
+  padding: 0 20px;
+  border-right: 1px solid lightgray;
+  margin-bottom: 0;
+}
+
+.logo span {
+  color: black;
+  font-size: 0.7rem;
+}
+
+@media (min-width: 769px) {}

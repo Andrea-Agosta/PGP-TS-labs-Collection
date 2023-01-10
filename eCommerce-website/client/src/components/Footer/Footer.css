@@ -1,0 +1,13 @@
+.footer-color {
+  background-color: #282c34;
+  color: #969696;
+}
+
+.footer-color a {
+  color: #969696;
+}
+
+.github:hover,
+.linkedin:hover {
+  color: #df4f3c;
+}

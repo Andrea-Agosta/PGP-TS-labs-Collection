@@ -27,15 +27,40 @@ const connectionDB = async (query: string) => {
   }
 };
 
-const getProductById = async (productId: Product) => {
-  const query = `SELECT * FROM salt_products WHERE product_id = '${productId}'`;
+const getAllProduct = async (): Promise<Product[]> => {
+  const query: string = `SELECT * FROM products`;
   const data = await connectionDB(query);
+  return data;
+};
 
+const getProductById = async (productId: string): Promise<Product> => {
+  const query: string = `SELECT * FROM products WHERE product_id = '${productId}'`;
+  const data = await connectionDB(query);
   return {
-    productId: data.product_id,
+    id: data.product_id,
     name: data.product_name,
+    description: data.product_description,
     price: data.product_price,
   };
 };
 
-export { getProductById };
+const getCart = async (): Promise<Product[]> => {
+  const query: string = `SELECT * FROM cart`;
+  const data = await connectionDB(query);
+  return data;
+};
+
+const addNewItemToCart = async (productId: string): Promise<Product[]> => {
+  const product = await getProductById(productId);
+  if (!product) {
+    throw new Error('Product not found');
+  }
+  const query: string = `
+    INSERT INTO cart (name, description, price, category, image_url, manufacturer, stock)
+    VALUES ('${product.name}', '${product.description}', ${product.price});
+  `;
+  const data = await connectionDB(query);
+  return data;
+};
+
+export { getAllProduct, getProductById, getCart, addNewItemToCart };

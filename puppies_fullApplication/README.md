@@ -1,19 +1,30 @@
-# Salt React Fullstack - TypeScript Addon
+# Puppy Application
+A web application that allows users to view, add, edit, and delete information about puppies.
 
-## Task
-Your task is to create a frontend to the API that you created the other day, aka `puppiesAPI`.
-This is a good app to put in your portfolio, so even though it does not have any design requirements, make it look nice. The application should be built with React and TypeScript
+## Technologies Used
+- Node.js with Typescript and Express for the backend server
+- React with Typescript for the frontend
+- Bootstrap for styling
 
-Requirements for the UI:
-- It should display the initial puppies that exist in the DB on first load.
-- It should have the possibility to add a new puppy.
-- It should have the possibility to update an existing puppy.
-- It should display details when clicking on a selected puppy.
-- It should be able to delete a puppy from the DB.
+## Getting Started
+1. Clone the repository: `git clone https://github.com/Andrea-Agosta/PGP-TS-labs-Collection`
+2. Navigate to the directory `cd ./puppies_fullApplication/server`
+3. Install dependencies: `npm install`
+4. Start the backend server: `npm run server`
+5. Open a new tab on your terminal and navigate to the directory `cd ./puppies_fullApplication/client`
+6. Start the frontend: `npm start`
+7. Open a web browser and navigate to `http://localhost:3000`
 
-### Extra challenge
-Fetch an image from Unsplash API (or similar) and aggregate the data in your own API to include the image with the rest of the puppy information.
+## Features
+- View a list of puppies with details such as name, breed, and age
+- View images of puppies
+- Add new puppies to the list
+- Edit existing puppy information
+- Delete puppies from the list
 
----
-
-GLHF!
+## API Endpoints
+- GET `/api/puppies` - Retrieve a list of all puppies
+- GET `/api/puppies/:id` - Retrieve a specific puppy by ID
+- POST `/api/puppies` - Add a new puppy to the list
+- PUT `/api/puppies/:id` - Update a specific puppy by ID
+- DELETE `/api/puppies/:id` - Delete a specific puppy by ID

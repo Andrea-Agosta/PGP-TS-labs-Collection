@@ -1,15 +1,28 @@
-# TypesScript with React AddOn
+# Random User App
+A React application that fetches random user data from the https://randomuser.me/api/ API and displays it on the homepage. The user can then edit the name and update it on the homepage. 
 
-## Task
-The task is to create a basic React application for random users. You'll be working towards the `https://randomuser.me/api/` api that will return a random user (you can fetch directly from your frontend this time).
+## Technologies Used
+- React 
+- TypeScript 
+- Axios 
 
-- The UI should display at least the users `address`, `age` and `name`.
-- It should also be possible to change the name through a form input (but you don't have to make a post request, just simply update the name in the UI.)
-  - in other words, make it possible to change the state of the name field.
-- For each new load of the application, a new user should appear.
+## Getting Started
+1. Clone the repository: `git clone https://github.com/Andrea-Agosta/PGP-TS-labs-Collection`
+2. Navigate to the directory `cd ./addons-ts-lab-reactbasics-main`
+3. Install dependencies: `npm install`
+4. Start the development server: `npm start`
+5. Open a web browser and navigate to `http://localhost:3000`
 
-## Goal
-The goal of this lab is to get familiar with TypeScript in React. Make sure to read the documentation to get to know the pre-existing types supplied by React. The lab is quite basic so practice applying TypeScript as much as possible, including `useState`, `useEffect`, `props` to mention a few.
+## Features
+- Fetches random user data from the https://randomuser.me/api/ API and displays it on the homepage
+- User can edit the name of the user from a form component
+- User can update the name on the homepage
 
+## Components
+- Homepage component that displays the user data and has a form to edit the name
+- Form component that takes the user input for the new name and has a button to submit the update
+- Axios is used to handle the HTTP requests to the API
 
-When you're finished, check out a suggested solution on the solution branch if you want.
+## Folder Structure
+- `src/components` contains the components of the application
+- `src/App.tsx` is the entry point of the application

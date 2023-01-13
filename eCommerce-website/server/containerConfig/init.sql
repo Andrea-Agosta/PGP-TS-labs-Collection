@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS public.salt_products;
+DROP TABLE IF EXISTS public.products;
 
 CREATE TABLE public.products
 (
@@ -26,6 +26,3 @@ INSERT INTO public.products(id, product_name, product_description, product_price
 INSERT INTO public.products(id, product_name, product_description, product_price) VALUES ('591bd47d-0b0d-4024-9141-a4bab78c69c0', 'Heart Shaped Tea Mug', 'These glass mugs are perfect for romantic tea in the mornings.', 18.55);
 INSERT INTO public.products(id, product_name, product_description, product_price) VALUES ('a10c9cf4-b67d-4db5-9678-7fdaa96f31d0', 'Tiny Zip Knife', 'These glass mugs are perfect for romantic tea in the mornings.', 21.65);
 INSERT INTO public.products(id, product_name, product_description, product_price) VALUES ('d3511601-db9a-45ee-b1b7-65a6b3d9e13e', 'Outdoor coffee brewer', 'When the wind is blowing but you still want coffee - this is what you need.', 19.99);
-
-
-

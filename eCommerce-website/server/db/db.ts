@@ -11,8 +11,10 @@ const pool = new Pool({
   max: 10,
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 3000,
-  user: process.env.POSTGRES_USER,
-  password: process.env.POSTGRES_PASSWORD,
+  // user: process.env.POSTGRES_USER,
+  user: 'postgres',
+  // password: process.env.POSTGRES_PASSWORD,
+  password: 'postgres123',
 });
 
 const connectionDB = async (query: string) => {

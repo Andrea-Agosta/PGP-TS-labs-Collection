@@ -7,5 +7,5 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - ./containerConfig/initSql.sql:/docker-entrypoint-initdb.d/initSql.sql
+      - ./containerConfig/init.sql:/docker-entrypoint-initdb.d/initSql.sql
       - ./data/psql:/var/lib/postgresql/data
